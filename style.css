@@ -1,0 +1,50 @@
+body {
+margin:0;
+font-family:'Segoe UI',sans-serif;
+color:#f1f5f9;
+overflow:hidden;
+}
+body::before {
+content:"";
+position:fixed;
+width:200%;
+height:200%;
+background:radial-gradient(white 1px,transparent 1px);
+background-size:50px 50px;
+animation:stars 60s linear infinite;
+opacity:0.15;
+}
+@keyframes stars {
+from{transform:translateY(0);}
+to{transform:translateY(-100px);}
+}
+.container {
+position:relative;
+z-index:2;
+max-width:500px;
+margin:auto;
+top:50%;
+transform:translateY(-50%);
+text-align:center;
+}
+button {
+background:rgba(31,41,55,0.7);
+color:white;
+padding:12px;
+margin:10px;
+border-radius:10px;
+cursor:pointer;
+}
+.hidden{display:none;}
+.footer{
+position:fixed;
+bottom:10px;
+width:100%;
+font-size:12px;
+opacity:0.6;
+}
+.music-btn{
+position:fixed;
+top:10px;
+right:10px;
+}

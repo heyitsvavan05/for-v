@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="style.css">
+<script src="script.js"></script>
+</head>
+<body>
+
+<audio id="bgm" loop>
+<source src="audio.mp3" type="audio/mpeg">
+</audio>
+<button class="music-btn" onclick="toggleMusic()">🎵</button>
+
+<div class="container">
+<p>
+Hey… your mind won’t rest again, huh?<br><br>
+Just stay here for a bit. You’re not alone tonight.
+</p>
+
+<button onclick="show('more')">Stay with me</button>
+<p id="more" class="hidden">
+You’re safe to rest. Nothing needs fixing right now.
+</p>
+
+<button onclick="location.href='menu.html'">Back</button>
+<div class="footer">I’m right here.</div>
+</div>
+
+</body>
+</html>

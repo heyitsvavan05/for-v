@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="style.css">
+<script src="script.js"></script>
+</head>
+<body>
+
+<audio id="bgm" loop>
+<source src="audio.mp3" type="audio/mpeg">
+</audio>
+<button class="music-btn" onclick="toggleMusic()">🎵</button>
+
+<div class="container">
+<p>
+Hey… I know how loud your mind gets sometimes.<br><br>
+I’m still here. I didn’t suddenly stop caring.<br>
+Sometimes I just go quiet to sort myself out.
+</p>
+
+<button onclick="show('more')">Still thinking?</button>
+<p id="more" class="hidden">
+If something was wrong, I wouldn’t leave you guessing. I’d come to you.
+</p>
+
+<audio controls>
+<source src="voice.mp3" type="audio/mpeg">
+</audio>
+
+<br>
+<button onclick="location.href='menu.html'">Back</button>
+<div class="footer">If I’m quiet, I’m not gone.</div>
+</div>
+
+</body>
+</html>
