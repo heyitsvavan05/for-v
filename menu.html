@@ -1,31 +1,39 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Choose</title>
-<link rel="stylesheet" href="style.css">
-<script src="script.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Choose your mood">
+  <title>Choose</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js"></script>
 </head>
 <body>
+  <audio id="bgm" loop>
+    <source src="audio.mp3" type="audio/mpeg">
+  </audio>
+  <button class="music-btn" onclick="toggleMusic()" aria-label="Toggle background music">🎵</button>
 
-<audio id="bgm" loop>
-<source src="audio.mp3" type="audio/mpeg">
-</audio>
-<button class="music-btn" onclick="toggleMusic()">🎵</button>
+  <div class="container">
+    <h2>What are you feeling right now?</h2>
 
-<div class="container">
-<h2>What are you feeling right now?</h2>
+    <div class="button-row">
+      <button onclick="location.href='overthinking.html'">💭 Overthinking</button>
+      <button onclick="location.href='missyou.html'">😔 Miss you</button>
+    </div>
 
-<button onclick="location.href='overthinking.html'">💭 I'm overthinking</button>
-<button onclick="location.href='missyou.html'">😔 I miss you</button><br>
+    <div class="button-row">
+      <button onclick="location.href='upset.html'">😡 Upset</button>
+      <button onclick="location.href='sleep.html'">💤 Can't sleep</button>
+    </div>
 
-<button onclick="location.href='upset.html'">😡 I'm upset</button>
-<button onclick="location.href='sleep.html'">💤 I can't sleep</button><br>
+    <div class="button-row">
+      <button onclick="location.href='wantyou.html'">❤️ Want you</button>
+    </div>
 
-<button onclick="location.href='wantyou.html'">❤️ I just want you</button>
-
-<div class="footer">
-<a href="secret.html" style="opacity:0.2;">do not click</a>
-</div>
-</div>
+    <div class="footer">
+      <a href="secret.html" style="opacity:0.2;">do not click</a>
+    </div>
+  </div>
 </body>
 </html>

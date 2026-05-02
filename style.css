@@ -1,50 +1,253 @@
+/* Base Styles */
 body {
-margin:0;
-font-family:'Segoe UI',sans-serif;
-color:#f1f5f9;
-overflow:hidden;
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  color: #f1f5f9;
+  overflow-x: hidden;
+  background: #0f172a;
+  min-height: 100vh;
 }
+
+/* Animated Background */
 body::before {
-content:"";
-position:fixed;
-width:200%;
-height:200%;
-background:radial-gradient(white 1px,transparent 1px);
-background-size:50px 50px;
-animation:stars 60s linear infinite;
-opacity:0.15;
+  content: "";
+  position: fixed;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(white 1px, transparent 1px);
+  background-size: 50px 50px;
+  animation: stars 60s linear infinite;
+  opacity: 0.15;
+  z-index: 1;
 }
+
 @keyframes stars {
-from{transform:translateY(0);}
-to{transform:translateY(-100px);}
+  from { transform: translateY(0); }
+  to { transform: translateY(-100px); }
 }
+
+/* Main Container */
 .container {
-position:relative;
-z-index:2;
-max-width:500px;
-margin:auto;
-top:50%;
-transform:translateY(-50%);
-text-align:center;
+  position: relative;
+  z-index: 2;
+  width: 90%;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  text-align: center;
+  min-height: auto;
 }
+
+.container p {
+  font-size: clamp(14px, 4vw, 18px);
+  line-height: 1.6;
+  margin: 20px 0;
+  letter-spacing: 0.5px;
+}
+
+/* Headings */
+h2 {
+  font-size: clamp(20px, 5vw, 28px);
+  margin: 0 0 30px 0;
+  font-weight: 300;
+  letter-spacing: 1px;
+}
+
+/* Button Styling */
 button {
-background:rgba(31,41,55,0.7);
-color:white;
-padding:12px;
-margin:10px;
-border-radius:10px;
-cursor:pointer;
+  background: rgba(31, 41, 55, 0.7);
+  color: #f1f5f9;
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  padding: clamp(10px, 3vw, 14px) clamp(16px, 4vw, 20px);
+  margin: clamp(8px, 2vw, 12px);
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: clamp(14px, 3.5vw, 16px);
+  font-family: 'Segoe UI', sans-serif;
+  transition: all 0.3s ease;
+  min-height: 44px;
+  min-width: 44px;
+  display: inline-block;
+  white-space: nowrap;
 }
-.hidden{display:none;}
-.footer{
-position:fixed;
-bottom:10px;
-width:100%;
-font-size:12px;
-opacity:0.6;
+
+button:hover {
+  background: rgba(51, 65, 85, 0.9);
+  border-color: rgba(148, 163, 184, 0.6);
+  transform: translateY(-2px);
 }
-.music-btn{
-position:fixed;
-top:10px;
-right:10px;
+
+button:active {
+  transform: translateY(0);
+}
+
+/* Button Row for Menu Layout */
+.button-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: clamp(8px, 2vw, 12px);
+  margin: 15px 0;
+}
+
+.button-row button {
+  flex: 1 1 auto;
+  min-width: 140px;
+}
+
+/* Hidden Content */
+.hidden {
+  display: none;
+}
+
+/* Footer */
+.footer {
+  position: fixed;
+  bottom: 60px;
+  left: 0;
+  right: 0;
+  width: 100%;
+  font-size: clamp(11px, 2.5vw, 13px);
+  opacity: 0.6;
+  text-align: center;
+  z-index: 2;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+/* Music Button */
+.music-btn {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  padding: clamp(8px, 3vw, 12px);
+  width: clamp(44px, 8vw, 50px);
+  height: clamp(44px, 8vw, 50px);
+  border-radius: 50%;
+  font-size: clamp(16px, 4vw, 20px);
+  z-index: 10;
+}
+
+/* Audio Player */
+audio {
+  width: 100%;
+  max-width: 300px;
+  margin: 20px auto;
+  display: block;
+  height: clamp(32px, 6vw, 40px);
+}
+
+/* Links */
+a {
+  color: #f1f5f9;
+  text-decoration: none;
+  transition: opacity 0.3s ease;
+}
+
+a:hover {
+  opacity: 0.8;
+}
+
+/* Mobile First - Extra Small Devices (320px - 480px) */
+@media (max-width: 480px) {
+  body {
+    overflow-y: auto;
+  }
+
+  .container {
+    width: 95%;
+    padding: 15px;
+    top: auto;
+    transform: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 100vh;
+  }
+
+  .container p {
+    margin: 15px 0;
+  }
+
+  button {
+    width: auto;
+    margin: 6px;
+  }
+
+  .button-row button {
+    min-width: 120px;
+  }
+
+  .footer {
+    bottom: 0;
+    background: rgba(15, 23, 42, 0.9);
+    padding: 15px 10px;
+  }
+}
+
+/* Small Devices (481px - 767px) */
+@media (min-width: 481px) and (max-width: 767px) {
+  .container {
+    width: 90%;
+  }
+
+  .button-row {
+    gap: 10px;
+  }
+
+  .button-row button {
+    min-width: 150px;
+  }
+}
+
+/* Tablets & Larger (768px+) */
+@media (min-width: 768px) {
+  .container {
+    width: 85%;
+    max-width: 600px;
+  }
+
+  button:hover {
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+  }
+}
+
+/* Landscape Orientation Adjustments */
+@media (orientation: landscape) and (max-height: 500px) {
+  .container {
+    margin-top: 10px;
+    top: auto;
+    transform: none;
+    padding: 15px;
+  }
+
+  .container p {
+    margin: 10px 0;
+  }
+
+  .footer {
+    display: none;
+  }
+
+  .music-btn {
+    top: 5px;
+    right: 5px;
+  }
+}
+
+/* Touch Device Enhancements */
+@media (hover: none) and (pointer: coarse) {
+  button {
+    padding: clamp(12px, 3vw, 16px) clamp(18px, 4vw, 24px);
+    margin: clamp(10px, 2.5vw, 14px);
+  }
+}
+
+/* High DPI Screens */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  body::before {
+    background-size: 100px 100px;
+  }
 }

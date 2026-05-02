@@ -1,30 +1,31 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<link rel="stylesheet" href="style.css">
-<script src="script.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="I want you">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js"></script>
 </head>
 <body>
+  <audio id="bgm" loop>
+    <source src="audio.mp3" type="audio/mpeg">
+  </audio>
+  <button class="music-btn" onclick="toggleMusic()" aria-label="Toggle background music">🎵</button>
 
-<audio id="bgm" loop>
-<source src="audio.mp3" type="audio/mpeg">
-</audio>
-<button class="music-btn" onclick="toggleMusic()">🎵</button>
+  <div class="container">
+    <p>
+      I'm here.<br><br>
+      If all you needed was me… you found me.
+    </p>
 
-<div class="container">
-<p>
-I’m here.<br><br>
-If all you needed was me… you found me.
-</p>
+    <button onclick="show('more')">Do you really want me?</button>
+    <p id="more" class="hidden">
+      Yes. Even when things aren't easy.
+    </p>
 
-<button onclick="show('more')">Do you really want me?</button>
-<p id="more" class="hidden">
-Yes. Even when things aren’t easy.
-</p>
-
-<button onclick="location.href='menu.html'">Back</button>
-<div class="footer">You matter to me.</div>
-</div>
-
+    <button onclick="location.href='menu.html'">Back</button>
+    <div class="footer">You matter to me.</div>
+  </div>
 </body>
 </html>
