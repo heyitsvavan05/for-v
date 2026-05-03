@@ -3,36 +3,34 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Choose your mood">
-  <title>Choose</title>
+  <title>Choose Your Mood</title>
   <link rel="stylesheet" href="style.css">
   <script src="script.js"></script>
 </head>
 <body>
-  <audio id="bgm" loop>
-    <source src="audio.mp3" type="audio/mpeg">
-  </audio>
-  <button class="music-btn" onclick="toggleMusic()" aria-label="Toggle background music">🎵</button>
+  <audio id="bgm" loop><source src="audio.mp3" type="audio/mpeg"></audio>
+  <button class="music-btn" onclick="toggleMusic()">🎵</button>
 
   <div class="container">
     <h2>What are you feeling right now?</h2>
 
     <div class="button-row">
       <button onclick="location.href='overthinking.html'">💭 Overthinking</button>
+      <button class="bday-btn" onclick="location.href='birthday.html'">🎂 Birthday!</button>
+    </div>
+
+    <div class="button-row">
       <button onclick="location.href='missyou.html'">😔 Miss you</button>
-    </div>
-
-    <div class="button-row">
       <button onclick="location.href='upset.html'">😡 Upset</button>
-      <button onclick="location.href='sleep.html'">💤 Can't sleep</button>
     </div>
 
     <div class="button-row">
+      <button onclick="location.href='sleep.html'">💤 Can't sleep</button>
       <button onclick="location.href='wantyou.html'">❤️ Want you</button>
     </div>
 
     <div class="footer">
-      <a href="secret.html" style="opacity:10;">DO NOT CLICK IF YOU WANNA KNOW A SECRET</a>
+      <a href="secret.html">DO NOT CLICK IF YOU WANNA KNOW A SECRET</a>
     </div>
   </div>
 </body>
