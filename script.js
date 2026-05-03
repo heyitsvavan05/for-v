@@ -1,58 +1,63 @@
 // --- 1. THE UNIVERSAL AUTOPLAY LOGIC ---
 function startAutoplay() {
-  const audio = document.getElementById('bgm');
-  if (audio && audio.paused) {
-    audio.play().then(() => {
-      // Sync the music button visual if it exists
+  const bgm = document.getElementById('bgm');
+  if (bgm && bgm.paused) {
+    bgm.play().then(() => {
       const btn = document.querySelector('.music-btn');
       if (btn) btn.style.opacity = '1';
     }).catch(error => {
-      console.log("Autoplay waiting for tap.");
+      console.log("Waiting for user interaction...");
     });
   }
 }
 
-// Global listeners for the first tap/click (Essential for Mobile)
+// Global listeners for first tap/scroll (Required for Mobile)
 document.addEventListener('click', startAutoplay, { once: true });
 document.addEventListener('touchstart', startAutoplay, { once: true });
 
 // --- 2. THE MUSIC BUTTON TOGGLE ---
 function toggleMusic() {
-  const audio = document.getElementById('bgm');
+  const bgm = document.getElementById('bgm');
   const btn = document.querySelector('.music-btn');
-  if (!audio) return;
+  if (!bgm) return;
 
-  if (audio.paused) {
-    audio.play();
+  if (bgm.paused) {
+    bgm.play();
     if (btn) btn.style.opacity = '1';
   } else {
-    audio.pause();
+    bgm.pause();
     if (btn) btn.style.opacity = '0.5';
   }
 }
 
-// --- 3. SHOW HIDDEN CONTENT (Specifically for the overthinking page) ---
+// --- 3. SHOW HIDDEN CONTENT ---
 function show(elementId) {
   const element = document.getElementById(elementId);
   if (element) {
     element.classList.toggle('hidden');
-    // Start music here if it hasn't already started
     startAutoplay();
   }
 }
 
-// --- 4. THE VOICE DUCKING (Make music quiet when voice plays) ---
+// --- 4. AUDIO DUCKING & VIDEO HANDLING ---
 document.addEventListener('play', function(e) {
   const bgm = document.getElementById('bgm');
-  // If the playing element is NOT the background music, it's a voice note
+  const video = document.getElementById('birthdayVideo');
+
   if (bgm && e.target !== bgm) {
-    bgm.volume = 0.2; // Dips background music to 20% volume
+    // If a voice note or video plays, handle bgm
+    if (e.target === video) {
+        bgm.pause();
+    } else {
+        bgm.volume = 0.2; // Duck volume for voice notes
+    }
   }
 }, true);
 
 document.addEventListener('pause', function(e) {
   const bgm = document.getElementById('bgm');
   if (bgm && e.target !== bgm) {
-    bgm.volume = 1.0; // Restores background music to 100% volume
+    bgm.play().catch(() => {});
+    bgm.volume = 1.0; 
   }
 }, true);
