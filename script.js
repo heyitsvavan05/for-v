@@ -1,9 +1,11 @@
 // --- 1. THE UNIVERSAL AUTOPLAY LOGIC ---
 function startAutoplay() {
-  const bgm = document.getElementById('bgm');
+  // Checks for either the standard BGM or the Yellow Page audio
+  const bgm = document.getElementById('bgm') || document.getElementById('yellowBgm');
+  
   if (bgm && bgm.paused) {
     bgm.play().then(() => {
-      const btn = document.querySelector('.music-btn');
+      const btn = document.querySelector('.music-btn') || document.querySelector('.yellow-music-btn');
       if (btn) btn.style.opacity = '1';
     }).catch(error => {
       console.log("Waiting for user interaction...");
@@ -17,8 +19,8 @@ document.addEventListener('touchstart', startAutoplay, { once: true });
 
 // --- 2. THE MUSIC BUTTON TOGGLE ---
 function toggleMusic() {
-  const bgm = document.getElementById('bgm');
-  const btn = document.querySelector('.music-btn');
+  const bgm = document.getElementById('bgm') || document.getElementById('yellowBgm');
+  const btn = document.querySelector('.music-btn') || document.querySelector('.yellow-music-btn');
   if (!bgm) return;
 
   if (bgm.paused) {
@@ -30,7 +32,7 @@ function toggleMusic() {
   }
 }
 
-// --- 3. SHOW HIDDEN CONTENT ---
+// --- 3. NAVIGATION & SHOW CONTENT ---
 function show(elementId) {
   const element = document.getElementById(elementId);
   if (element) {
@@ -39,9 +41,14 @@ function show(elementId) {
   }
 }
 
+// NEW: Redirect function for the 11th Yellow Button
+function goToYellow() {
+    window.location.href = 'yellow.html'; 
+}
+
 // --- 4. AUDIO DUCKING & VIDEO HANDLING ---
 document.addEventListener('play', function(e) {
-  const bgm = document.getElementById('bgm');
+  const bgm = document.getElementById('bgm') || document.getElementById('yellowBgm');
   const video = document.getElementById('birthdayVideo');
 
   if (bgm && e.target !== bgm) {
@@ -55,8 +62,9 @@ document.addEventListener('play', function(e) {
 }, true);
 
 document.addEventListener('pause', function(e) {
-  const bgm = document.getElementById('bgm');
+  const bgm = document.getElementById('bgm') || document.getElementById('yellowBgm');
   if (bgm && e.target !== bgm) {
+    // Check if the target was a video/voice note before resuming
     bgm.play().catch(() => {});
     bgm.volume = 1.0; 
   }
