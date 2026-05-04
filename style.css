@@ -33,25 +33,11 @@ body::before {
   width: 90%;
   max-width: 500px;
   margin: 0 auto;
-  padding: 80px 20px 40px 20px; /* Space for music button */
+  padding: 80px 20px 40px 20px; 
   text-align: center;
 }
 
-.container p {
-  font-size: clamp(14px, 4vw, 18px);
-  line-height: 1.6;
-  margin: 20px 0;
-  letter-spacing: 0.5px;
-}
-
-h2 {
-  font-size: clamp(22px, 6vw, 32px);
-  margin-bottom: 30px;
-  font-weight: 300;
-  letter-spacing: 1px;
-}
-
-/* Button Styling */
+/* --- BUTTON LOGIC --- */
 button {
   background: rgba(31, 41, 55, 0.7);
   color: #f1f5f9;
@@ -78,9 +64,19 @@ button:hover {
   animation: pulse 2s infinite;
 }
 
+/* 11th Yellow Button Special Style */
+.yellow-btn {
+  background: rgba(253, 224, 71, 0.2) !important; 
+  border: 1px solid rgba(253, 224, 71, 0.5) !important;
+  color: #fef9c3 !important; 
+  box-shadow: 0 0 15px rgba(234, 179, 8, 0.3);
+  font-weight: 600;
+  animation: pulse 2.5s infinite; /* Uses same pulse logic, slightly slower */
+}
+
 @keyframes pulse {
   0% { transform: scale(1); }
-  50% { transform: scale(1.05); }
+  50% { transform: scale(1.04); }
   100% { transform: scale(1); }
 }
 
@@ -97,27 +93,50 @@ button:hover {
   flex: 1 1 140px;
 }
 
-.hidden { display: none; }
-
-/* Video & Audio Containers */
-.video-container {
-  width: 100%;
-  border-radius: 15px;
-  overflow: hidden;
-  margin: 25px 0;
-  background: #000;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+/* --- PAPER FRAME AESTHETIC (For yellow.html) --- */
+.paper-container {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 20px;
+  min-height: 80vh;
 }
 
-video { width: 100%; display: block; }
-
-audio {
-  width: 100%;
-  margin: 20px 0;
-  filter: invert(100%) hue-rotate(180deg); /* Makes player match dark theme */
+.paper-frame {
+  background: #fffdf5; 
+  color: #334155;      
+  padding: 50px 35px;
+  max-width: 550px;
+  border-radius: 2px;
+  position: relative;
+  box-shadow: 
+    0 1px 1px rgba(0,0,0,0.1), 
+    0 10px 0 -5px #fffdf5, 
+    0 10px 1px -4px rgba(0,0,0,0.1), 
+    0 20px 0 -10px #fffdf5, 
+    0 20px 1px -9px rgba(0,0,0,0.1); 
+  
+  border-left: 5px solid #fde047; /* The "Yellow" anchor */
+  font-family: 'Georgia', serif;
+  line-height: 2;
+  white-space: pre-line;
+  text-align: left;
+  font-size: 1.05rem;
 }
 
-/* Music Control Button */
+/* Texture overlay for the paper */
+.paper-frame::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background-image: url("https://www.transparenttextures.com/patterns/natural-paper.png");
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+/* Universal Music Button */
 .music-btn {
   position: fixed;
   top: 20px;
@@ -126,24 +145,13 @@ audio {
   height: 50px;
   border-radius: 50%;
   z-index: 100;
+  background: rgba(31, 41, 55, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 20px;
 }
 
-/* Footers & Messages */
-.footer {
-  margin-top: 50px;
-  font-size: 12px;
-  opacity: 0.5;
-}
-
-.special-message {
-  margin-top: 40px;
-  padding: 20px;
-  border-top: 1px dashed rgba(255,255,255,0.2);
-  color: #fda4af;
-}
-
+.hidden { display: none; }
 a { color: inherit; text-decoration: none; }
