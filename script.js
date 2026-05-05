@@ -1,26 +1,43 @@
-// --- 1. THE UNIVERSAL AUTOPLAY LOGIC ---
+// --- 1. UNIVERSAL AUDIO HANDLER ---
+// This function detects which audio is present and handles the autoplay/fallback
 function startAutoplay() {
-  // Checks for either the standard BGM or the Yellow Page audio
-  const bgm = document.getElementById('bgm') || document.getElementById('yellowBgm');
+  const yellowBgm = document.getElementById('yellowBgm');
+  const standardBgm = document.getElementById('bgm');
   
-  if (bgm && bgm.paused) {
-    bgm.play().then(() => {
-      const btn = document.querySelector('.music-btn') || document.querySelector('.yellow-music-btn');
+  // Priority: If yellowBgm is on the page, use it. Otherwise, use standard bgm.
+  const activeAudio = yellowBgm || standardBgm;
+
+  if (activeAudio && activeAudio.paused) {
+    activeAudio.play().then(() => {
+      // Audio started successfully
+      const btn = document.querySelector('.music-btn');
       if (btn) btn.style.opacity = '1';
     }).catch(error => {
-      console.log("Waiting for user interaction...");
+      console.log("Autoplay blocked. Waiting for user interaction...");
+      
+      // MOBILE FALLBACK: Play as soon as the user taps anywhere on the screen
+      const playOnInteraction = () => {
+        activeAudio.play();
+        const btn = document.querySelector('.music-btn');
+        if (btn) btn.style.opacity = '1';
+        document.removeEventListener('click', playOnInteraction);
+        document.removeEventListener('touchstart', playOnInteraction);
+      };
+
+      document.addEventListener('click', playOnInteraction);
+      document.addEventListener('touchstart', playOnInteraction);
     });
   }
 }
 
-// Global listeners for first tap/scroll (Required for Mobile)
+// Global listeners for first interaction (Required for main page entry)
 document.addEventListener('click', startAutoplay, { once: true });
 document.addEventListener('touchstart', startAutoplay, { once: true });
 
-// --- 2. THE MUSIC BUTTON TOGGLE ---
+// --- 2. MUSIC TOGGLE CONTROL ---
 function toggleMusic() {
-  const bgm = document.getElementById('bgm') || document.getElementById('yellowBgm');
-  const btn = document.querySelector('.music-btn') || document.querySelector('.yellow-music-btn');
+  const bgm = document.getElementById('yellowBgm') || document.getElementById('bgm');
+  const btn = document.querySelector('.music-btn');
   if (!bgm) return;
 
   if (bgm.paused) {
@@ -32,7 +49,7 @@ function toggleMusic() {
   }
 }
 
-// --- 3. NAVIGATION & SHOW CONTENT ---
+// --- 3. SHOW HIDDEN CONTENT (For overthinking/miss you pages) ---
 function show(elementId) {
   const element = document.getElementById(elementId);
   if (element) {
@@ -41,31 +58,38 @@ function show(elementId) {
   }
 }
 
-// NEW: Redirect function for the 11th Yellow Button
-function goToYellow() {
-    window.location.href = 'yellow.html'; 
+// --- 4. NAVIGATION LOGIC (The "Prime" for Yellow Page) ---
+function enterYellow() {
+    // Wakes up the browser's audio engine before changing pages
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    if (AudioContext) {
+        const context = new AudioContext();
+        context.resume().then(() => {
+            window.location.href = 'yellow.html';
+        });
+    } else {
+        window.location.href = 'yellow.html';
+    }
 }
 
-// --- 4. AUDIO DUCKING & VIDEO HANDLING ---
+// --- 5. AUDIO DUCKING & VIDEO HANDLING ---
 document.addEventListener('play', function(e) {
-  const bgm = document.getElementById('bgm') || document.getElementById('yellowBgm');
+  const activeBgm = document.getElementById('yellowBgm') || document.getElementById('bgm');
   const video = document.getElementById('birthdayVideo');
 
-  if (bgm && e.target !== bgm) {
-    // If a voice note or video plays, handle bgm
+  if (activeBgm && e.target !== activeBgm) {
     if (e.target === video) {
-        bgm.pause();
+        activeBgm.pause();
     } else {
-        bgm.volume = 0.2; // Duck volume for voice notes
+        activeBgm.volume = 0.2; // Lower volume for voice notes/other media
     }
   }
 }, true);
 
 document.addEventListener('pause', function(e) {
-  const bgm = document.getElementById('bgm') || document.getElementById('yellowBgm');
-  if (bgm && e.target !== bgm) {
-    // Check if the target was a video/voice note before resuming
-    bgm.play().catch(() => {});
-    bgm.volume = 1.0; 
+  const activeBgm = document.getElementById('yellowBgm') || document.getElementById('bgm');
+  if (activeBgm && e.target !== activeBgm) {
+    activeBgm.play().catch(() => {});
+    activeBgm.volume = 1.0; 
   }
 }, true);
