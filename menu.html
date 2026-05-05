@@ -8,7 +8,10 @@
   <script src="script.js"></script>
 </head>
 <body>
-  <audio id="bgm" loop><source src="audio.mp3" type="audio/mpeg"></audio>
+  <audio id="bgm" loop playsinline>
+    <source src="audio.mp3" type="audio/mpeg">
+  </audio>
+
   <button class="music-btn" onclick="toggleMusic()">🎵</button>
 
   <div class="container">
@@ -16,7 +19,7 @@
 
     <div class="button-row">
       <button class="bday-btn" onclick="location.href='birthday.html'">🎂 Birthday!</button>
-      <button class="yellow-btn" onclick="location.href='yellow.html'">💛 11th Yellow</button>
+      <button class="yellow-btn" onclick="enterYellow()">💛 11th Yellow</button>
     </div>
 
     <div class="button-row">
@@ -37,5 +40,10 @@
       <a href="secret.html">DO NOT CLICK IF YOU WANNA KNOW A SECRET</a>
     </div>
   </div>
+
+  <script>
+    // Start menu music on load
+    window.addEventListener('load', startAutoplay);
+  </script>
 </body>
 </html>
