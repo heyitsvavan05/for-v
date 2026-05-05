@@ -3,14 +3,31 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="A personal website">
+  <meta name="description" content="A personal website for V">
   <title>For V</title>
   <link rel="stylesheet" href="style.css">
+  <script src="script.js"></script>
 </head>
 <body>
   <div class="container">
     <h2>Hi… if you're here, it probably means you needed me.</h2>
-    <button onclick="location.href='menu.html'">Enter</button>
+    
+    <button onclick="enterSite()">Enter</button>
   </div>
+
+  <script>
+    function enterSite() {
+      // This wakes up the audio context so music can play on the next pages
+      const AudioContext = window.AudioContext || window.webkitAudioContext;
+      if (AudioContext) {
+        const context = new AudioContext();
+        context.resume().then(() => {
+          window.location.href = 'menu.html';
+        });
+      } else {
+        window.location.href = 'menu.html';
+      }
+    }
+  </script>
 </body>
 </html>
